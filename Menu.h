@@ -2,7 +2,7 @@
 #define Menu_h
 #include "Consultas.h"
 #include "Controlador.h"
-#include "MenuSimulacion.h"
+#include "Simulacion.h"
 #include <cstdlib>
 #include <iostream>
 #include <stdlib.h>
@@ -24,20 +24,26 @@ void Menu::MenuPrincipal(){
 		
 		controlar.RecuperarPacientes();
         controlar.Hospital_Personal();
-     	Consultas consultar(controlar);
+     //	Consultas consultar(controlar);
    	//	consultar.HospitalesCalleCarreras(22,28,15,17);
    	//	consultar.HospitalesCalleCarreras(100,100,100,100);
    		//controlar.AdicionarHospital("hcd","jsa","sady",32,23,15,13,21,20);
+   	/*	controlar.AdicionarPersonal("Hospital San Ignacio","Medico","Piso","Leon","Parada","CC",5467348,"M",31213213,4745854
+		   ,15,2,1999,"leon@gmail.com","Bogota","Colombia","Carrera 24c #25-34 sur","Candelaria",14,22,0);
+		controlar.AdicionarPersonal("Hospital San Ignacio","Enfermero","Piso","Oscar","Ruiz","CC",5121367348,"M",43643743,4389349
+		   ,11,6,1999,"oscar@gmail.com","Soacha","Colombia","Diagonal 24c #25-34 sur","San Mateo",14,22,0);*/
    	//	controlar.AdicionarPaciente("Guillermo","Velez",1234,"M",21,10,2001,"Ninguna","Olaya","Asintomatico","Leve","acetaminofen",10,"Hospital Fontibon");
    	//	controlar.AdicionarPaciente("Juan","Bautista",12345,"M",21,10,2001,"Ninguna","Olaya","Asintomatico","Moderado","acetaminofen",9,"Hospital San Blas");
 	//	controlar.AdicionarPaciente("Daniel","Vargas",467342,"M",15,11,2004,"Ninguna","Restrepo","Asintomatico","Moderado","acetaminofen",8, "Hospital San Blas");
 	//	controlar.AdicionarPaciente("Sofia","Munoz",432112,"F",15,11,1999,"Dermatitis","Restrepo","Asintomatico","Leve","Gengibre",7, "Hospital San Blas");
+	//	controlar.AdicionarPaciente("Daniel","Segura",578481,"M",15,11,2001,"Dermatitis","Quiroga","Asintomatico","Leve","Gengibre",9, "Hospital San Blas");
 	//	controlar.AdicionarPaciente("Luisa","Espitia",621721,"F",12,12,1998,"Ninguna","Suba","Asintomatico","Leve","Gengibre",8, "Hospital Fontibon");
    		controlar.ConsultarPacientes();
    		controlar.ConsultarPersonalSalud();
-   		MenuSimulacion menusimulacion(controlar);
-   		menusimulacion.MostrarHospitales();
-   	//	controlar.ConsultarPersonalSalud();
+   	
+   	//	Simulacion simular(controlar);
+   	//	simular.MostrarHospitales();
+   		
    		
 }
 #endif /*Menu */ 

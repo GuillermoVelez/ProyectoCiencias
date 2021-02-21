@@ -151,7 +151,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit11]
-FileName=MenuSimulacion.h
+FileName=Simulacion.h
 CompileCpp=1
 Folder=
 Compile=1

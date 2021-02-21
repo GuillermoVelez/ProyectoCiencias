@@ -1,3 +1,10 @@
+/**
+  *@file Controlador.h
+  *@version 1.0
+  *@date 22/02/2021
+  *@title Clase Controlador
+  *@brief Clase principal que maneja el programa
+  */
 #ifndef	Controlador_h
 #define Controlador_h
 #include "Listas.h"
@@ -9,14 +16,17 @@
 #include <iostream>
 #include <conio.h>
 #include <cstring>
+#include <ctime>
 using namespace std;
-
+/**
+*/
 class Controlador{
 	private :
 		Hospitales LlenarH;
 		Hospital auxH;
 		Personal auxPS;
 		Paciente auxPa;
+		FechaCita auxFC;
 		LeerArchivos leer;
 		EscribirArchivos Escribir;
 	    Lista <Hospital> Listah;
@@ -41,6 +51,9 @@ class Controlador{
 	Lista <Hospital> getListaHospitales();
 	Lista <Personal> getListaPersonal();
 	Lista <Paciente> getListaPacientes();
+	void setListaHospitales(Lista <Hospital> LHospitales);
+	void setListaPersonal(Lista <Personal> LPersonalDeSalud);
+	void setListaPacientes(Lista <Paciente> LPacientes);
 
 
 	
@@ -89,6 +102,7 @@ void Controlador::ConsultarPersonalSalud(){
 }
 
 void Controlador::ConsultarPacientes(){
+
 	for(int j=1;j<=ListaPa.tamano_lista();j++){
 		     	auxPa=ListaPa.obtenerDato(j);
 		     	cout<<j<<": ";
@@ -98,6 +112,11 @@ void Controlador::ConsultarPacientes(){
 					if(i!=auxPa.idPersonal.tamano_lista()){
 						cout<<",";
 					}
+				}
+				cout<<endl;
+				for(int k=1;k<=auxPa.FechasPacientes.tamano_lista();k++){
+					auxFC=auxPa.FechasPacientes.obtenerDato(k);
+					cout<<auxFC.diaCita<<"/"<<auxFC.MesCita<<"/"<<auxFC.AnioCita<<endl;
 				}
 				cout<<endl;
 	} 
@@ -116,36 +135,69 @@ void Controlador::AdicionarHospital(string Nombre,string Gerente,string Localida
 	auxH.Numero_Medicos=0;
 	auxH.Numero_Enfermeros=0;
 	Listah.insertar_final(auxH);
-	Escribir.ModificarArchivoHospital(Listah);
 }
 void Controlador::AdicionarPersonal(string Hospital,string Tipo,string Seccion,string Nombre,string Apellido,string TipoIdentificacion,long int NumeroIdentificacion,string Sexo,int TelefonoCel,int Telefonofij,int dia,int mes,int anio,string Correo,string Ciudad,string Pais,string Direccion,string Barrio,int hora_inicial,int hora_final,int num_pacientes){
 	PersonalSalud VerificarEdad;
 	Personal auxPS;
+	Personal auxPS2;
+	bool auxHospital=false;
+	bool auxId=false;
 	auxPS.Hospital=Hospital;
-	auxPS.Tipo=Tipo;
-	auxPS.Seccion=Seccion;
-	auxPS.Nombre=Nombre;
-	auxPS.Apellido=Apellido;
-	auxPS.TipoIdentificacion=TipoIdentificacion;
-	auxPS.NumeroIdentificacion=NumeroIdentificacion;
-	auxPS.Sexo=Sexo;
-	auxPS.TelefonoCel=TelefonoCel;
-	auxPS.Telefonofij=Telefonofij;
-	auxPS.dia=dia;
-	auxPS.mes=mes;
-	auxPS.anio=anio;
-	if(VerificarEdad.calcularEdad(2021,2,22,auxPS.anio,auxPS.mes,auxPS.anio)){
-		auxPS.Correo=Correo;
-		auxPS.Ciudad=Ciudad;
-		auxPS.Pais=Pais;
-		auxPS.Direccion=Direccion;
-		auxPS.Barrio=Barrio;
-		auxPS.hora_inicial=hora_inicial;
-		auxPS.hora_final=hora_final;
-		auxPS.num_pacientes=num_pacientes;
-		ListaPS.insertar_final(auxPS);
+	for(int i=1;i<=Listah.tamano_lista();i++){
+		auxH=Listah.obtenerDato(i);
+		if(auxPS.Hospital==auxH.Nombre){
+			auxHospital=true;
+			break;
+		}
+	}
+	if(auxHospital==true){
+		auxPS.Tipo=Tipo;
+		auxPS.Seccion=Seccion;
+		auxPS.Nombre=Nombre;
+		auxPS.Apellido=Apellido;
+		auxPS.TipoIdentificacion=TipoIdentificacion;
+		auxPS.NumeroIdentificacion=NumeroIdentificacion;
+		for(int j=1;j<=ListaPS.tamano_lista();j++){
+			auxPS2=ListaPS.obtenerDato(j);
+			if(auxPS2.NumeroIdentificacion==auxPS.NumeroIdentificacion){
+				auxId=true;
+				break;
+			}
+		}
+		if(auxId==false){
+			auxPS.Sexo=Sexo;
+			auxPS.TelefonoCel=TelefonoCel;
+			auxPS.Telefonofij=Telefonofij;
+			auxPS.dia=dia;
+			auxPS.mes=mes;
+			auxPS.anio=anio;
+			if(VerificarEdad.calcularEdad(2021,2,22,auxPS.anio,auxPS.mes,auxPS.anio)){
+				auxPS.Correo=Correo;
+				auxPS.Ciudad=Ciudad;
+				auxPS.Pais=Pais;
+				auxPS.Direccion=Direccion;
+				auxPS.Barrio=Barrio;
+				auxPS.hora_inicial=hora_inicial;
+				auxPS.hora_final=hora_final;
+				auxPS.num_pacientes=num_pacientes;
+				ListaPS.insertar_final(auxPS);
+				for(int k=1;k<=Listah.tamano_lista();k++){
+					auxH=Listah.obtenerDato(k);
+					if(auxH.Nombre==auxPS.Hospital){
+						auxH.Personal_Hospital.insertar_final(auxPS);
+						Listah.cambiar(k,auxH);
+						break;
+					}
+				}
+				Escribir.ModificarArchivoPersonal(ListaPS);	
+			}else{
+				cout<<"El personal ingresado no es mayor de edad"<<endl;
+			}
+		}else{
+			cout<<"El id ya esta en la lista"<<endl;
+		}
 	}else{
-		cout<<"El personal ingresado no es mayor de edad"<<endl;
+		cout<<"El hospital no esta en la lista"<<endl;
 	}
 	
 	
@@ -154,42 +206,58 @@ void Controlador::AdicionarPersonal(string Hospital,string Tipo,string Seccion,s
 void Controlador::AdicionarPaciente(string Nombre,string Apellido,long int NumeroIdentificacion,string sexo,int dia,int mes,int anio,string Enfermedades,string Localidad,string Estado,string NivelGravedad,string Medicamentos, int hora, string Hospital){
 	Paciente auxPa2;
 	Paciente auxPa;
+	bool auxId=false;
+	srand(time(NULL));
 	auxPa.Nombre=Nombre;
 	auxPa.Apellido=Apellido;
 	auxPa.NumeroIdentificacion=NumeroIdentificacion;
-	auxPa.sexo=sexo;
-	auxPa.dia=dia;
-	auxPa.mes=mes;
-	auxPa.anio=anio;
-	auxPa.Enfermedades=Enfermedades;
-	auxPa.Localidad=Localidad;
-	auxPa.Estado=Estado;
-	auxPa.NivelGravedad=NivelGravedad;
-	auxPa.Medicamentos=Medicamentos;
-	auxPa=Personal_Paciente(auxPa,hora,Hospital);
-	for(int k=1;k<=auxPa.idPersonal.tamano_lista();k++){
-		cout<<auxPa.idPersonal.obtenerDato(k)<<endl;
+	for(int i=1;i<=ListaPa.tamano_lista();i++){
+			auxPa2=ListaPa.obtenerDato(i);
+			if(auxPa2.NumeroIdentificacion==auxPa.NumeroIdentificacion){
+				auxId=true;
+				break;
+			}
 	}
-//	
-	if((auxPa.NivelGravedad=="Leve" && auxPa.idPersonal.tamano_lista()==2) || (auxPa.NivelGravedad=="Moderado" && auxPa.idPersonal.tamano_lista()==3) || (auxPa.NivelGravedad=="Severo" && auxPa.idPersonal.tamano_lista()==4)){
-		ListaPa.insertar_final(auxPa);
-	}else{
-		cout<<"Lo siento no tenemos personal suficiente para atenderlo. Debe esperar a que se desocupe personal"<<endl;
-		for(int i=1;i<=ListaPS.tamano_lista(); i++){
-			auxPS=ListaPS.obtenerDato(i);
-			for(int j=1; j<=auxPS.pacientesPS.tamano_lista(); j++){
-				auxPa2=auxPS.pacientesPS.obtenerDato(j);
-				if(auxPa.NumeroIdentificacion==auxPa2.NumeroIdentificacion){
-					auxPS.pacientesPS.eliminar(j);
-					ListaPS.cambiar(i,auxPS);
-					break;
-				}		
+	if(auxId!=true){
+		auxPa.sexo=sexo;
+		auxPa.dia=dia;
+		auxPa.mes=mes;
+		auxPa.anio=anio;
+		auxPa.Enfermedades=Enfermedades;
+		auxPa.Localidad=Localidad;
+		auxPa.Estado=Estado;
+		auxPa.NivelGravedad=NivelGravedad;
+		auxPa.Medicamentos=Medicamentos;
+		for(int x=1;x<=2;x++){
+			auxFC.diaCita=rand()%31+1;
+			auxFC.MesCita=rand()%13+1;
+			auxFC.AnioCita=2020;
+			auxPa.FechasPacientes.insertar_final(auxFC);
+		}
+		auxPa=Personal_Paciente(auxPa,hora,Hospital);
+		if((auxPa.NivelGravedad=="Leve" && auxPa.idPersonal.tamano_lista()==2) || (auxPa.NivelGravedad=="Moderado" && auxPa.idPersonal.tamano_lista()==3) || (auxPa.NivelGravedad=="Severo" && auxPa.idPersonal.tamano_lista()==4)){
+			ListaPa.insertar_final(auxPa);
+		}else{
+			cout<<"Lo siento no tenemos personal suficiente para atenderlo. Debe esperar a que se desocupe personal"<<endl;
+			for(int i=1;i<=ListaPS.tamano_lista(); i++){
+				auxPS=ListaPS.obtenerDato(i);
+				for(int j=1; j<=auxPS.pacientesPS.tamano_lista(); j++){
+					auxPa2=auxPS.pacientesPS.obtenerDato(j);
+					if(auxPa.NumeroIdentificacion==auxPa2.NumeroIdentificacion){
+						auxPS.pacientesPS.eliminar(j);
+						ListaPS.cambiar(i,auxPS);
+						break;
+					}		
+				}
+				
 			}
 			
 		}
-		
+	}else{
+		cout<<"El numero de id ya esta en el sistema"<<endl;
 	}
 	Escribir.ModificarArchivoPaciente(ListaPa);
+
 
 
 }
@@ -216,14 +284,14 @@ void Controlador::Hospital_Personal(){
 		contM=0;
 		contE=0;
 	}
-	for(int k=1;k<=Listah.tamano_lista();k++){
+/*	for(int k=1;k<=Listah.tamano_lista();k++){
 		     	auxH=Listah.obtenerDato(k);
 		     	
 		     	cout<<k<<": ";
 		     	cout<<auxH.Nombre<<","<<auxH.Numero_Medicos<<","<<auxH.Numero_Enfermeros<<endl;    
 		     	
 				
-	}
+	}*/
 cout<<endl;
 }
 Paciente Controlador::Personal_Paciente(Paciente nuevo_paciente,int hora, string Hospital){
@@ -316,5 +384,14 @@ Lista <Personal> Controlador::getListaPersonal(){
 }
 Lista <Paciente> Controlador::getListaPacientes(){
 	return  ListaPa;
+}
+void Controlador::setListaHospitales(Lista <Hospital> LHospitales){
+	
+}
+void Controlador::setListaPersonal(Lista <Personal> LPersonalDeSalud){
+	
+}
+void Controlador::setListaPacientes(Lista <Paciente> LPacientes){
+	
 }
 #endif /*Controlador */ 

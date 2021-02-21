@@ -82,9 +82,9 @@ Lista <Hospital> LeerArchivos::LLenarHospitales(Lista <Hospital> Listah){
     return Listah;
 }
 Lista <Personal> LeerArchivos::LLenarPersonalSalud(Lista <Personal> ListaPS){
-	
  	string linea;
 	ifstream file;
+	Personal auxPS;
 	//ios::append añadir informacion despues de la que ya tenga
 	file.open("Archivos//PersonalSalud.txt",ios::in);
 	
@@ -104,7 +104,6 @@ Lista <Personal> LeerArchivos::LLenarPersonalSalud(Lista <Personal> ListaPS){
 			
     		
 			getline(file,linea,',');
-    		    	    //cout<<linea<<endl;
 			auxPS.Nombre=linea;
     		
 			getline(file,linea,',');
@@ -178,13 +177,21 @@ Lista <Personal> LeerArchivos::LLenarPersonalSalud(Lista <Personal> ListaPS){
 			ListaPS.insertar_final(auxPS);
 			
 		}
+		
     file.close();
+    for(int j=1;j<=ListaPS.tamano_lista();j++){
+		     	auxPS=ListaPS.obtenerDato(j);
+		     	cout<<j<<": ";
+		     	cout<<auxPS.Nombre<<","<<auxPS.Tipo<<","<<auxPS.Hospital<<","<<auxPS.Direccion<<","<<auxPS.num_pacientes<<endl;    
+		     
+	}
     return ListaPS;
 }
 
 Lista <Paciente> LeerArchivos::LLenarPacientes(Lista <Paciente> ListaPa){
 	string linea;
 	ifstream file;
+	FechaCita auxFC;
 	char *char_part ;
 	char *char_part2 ;
 	int id;
@@ -229,13 +236,30 @@ Lista <Paciente> LeerArchivos::LLenarPacientes(Lista <Paciente> ListaPa){
            	
            	getline(file,linea,',');
            	auxPa.NivelGravedad=linea;
+           	
+           	getline(file,linea,',');
+           	auxPa.Medicamentos=linea;
+           	
+           	getline(file,linea,',');
+           	auxFC.diaCita=atoi(linea.c_str());
+           	getline(file,linea,',');
+           	auxFC.MesCita=atoi(linea.c_str());
+           	getline(file,linea,',');
+           	auxFC.AnioCita=atoi(linea.c_str());
+           	auxPa.FechasPacientes.insertar_final(auxFC);
+           	getline(file,linea,',');
+           	auxFC.diaCita=atoi(linea.c_str());
+           	getline(file,linea,',');
+           	auxFC.MesCita=atoi(linea.c_str());
            	if(auxPa.Estado=="Muerto"){
            		getline(file,linea,'.');
-           		auxPa.Medicamentos=linea;
+           		auxFC.AnioCita=atoi(linea.c_str());
+           		auxPa.FechasPacientes.insertar_final(auxFC);
 			}else{
            		getline(file,linea,',');
-           		auxPa.Medicamentos=linea;
-           	
+           		auxFC.AnioCita=atoi(linea.c_str());
+           		auxPa.FechasPacientes.insertar_final(auxFC);
+           		
 	           	if(auxPa.NivelGravedad=="Leve"){
 	           		getline(file,linea,',');
 	           		auxPa.idPersonal.insertar_final(atoi(linea.c_str()));

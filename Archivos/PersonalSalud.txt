@@ -1,7 +1,9 @@
-Hospital San Ignacio,Medico,Externo,Maria Fernanda,Suarez Espitia,CC,352567,F,311226721,4567219,daniela@gmail.com,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Venecia,6,14,0.
-Hospital San Blas,Medico,Externo,Alba Consuelo,Suarez Espitia,CC,319218,F,311226721,4567219,daniela@gmail.com,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Venecia,6,14,0.
-Hospital San Blas,Medico,Externo,Luz Mary,Suarez Espitia,CC,319217,F,311226721,4567219,daniela@gmail.com,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Venecia,6,14,0.
-Hospital San Blas,Enfermero,UCI,Aura Juliet,Suarez Espitia,CC,245612,F,311226721,4567219,daniela@gmail.com,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Envigado,6,14,0.    
-Hospital San Blas,Enfermero,UCI,Ingrid Geraldine,Suarez Espitia,CC,2451212,F,311226721,4567219,daniela@gmail.com,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Envigado,6,14,0.      
-Hospital Fontibon,Enfermero,UCI,Daniela Valentina,Suarez Espitia,CC,2451213,F,311226721,4567219,daniela@gmail.com,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Envigado,6,14,0.  
-Hospital Fontibon,Medico,UCI,Julian Garcia,Suarez Espitia,CC,72832,F,311226721,4567219,daniela@gmail.com,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Envigado,6,14,0.      
+Hospital San Ignacio,Medico,Externo,Maria Fernanda,Suarez Espitia,CC,352567,F,311226721,4567219,0,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Venecia,6,14,0.
+Hospital San Blas,Medico,Externo,Alba Consuelo,Suarez Espitia,CC,319218,F,311226721,4567219,0,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Venecia,6,14,4.
+Hospital San Blas,Medico,Externo,Luz Mary,Suarez Espitia,CC,319217,F,311226721,4567219,0,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Venecia,6,14,0.
+Hospital San Blas,Enfermero,UCI,Aura Juliet,Suarez Espitia,CC,245612,F,311226721,4567219,0,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Envigado,6,14,4.
+Hospital San Blas,Enfermero,UCI,Ingrid Geraldine,Suarez Espitia,CC,2451212,F,311226721,4567219,0,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Envigado,6,14,2.
+Hospital Fontibon,Enfermero,UCI,Daniela Valentina,Suarez Espitia,CC,2451213,F,311226721,4567219,0,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Envigado,6,14,2.
+Hospital Fontibon,Medico,UCI,Julian Garcia,Suarez Espitia,CC,72832,F,311226721,4567219,0,1990,10,1,Medellin,Colombia,Cra 20H #75-43,Envigado,6,14,2.
+Hospital San Ignacio,Medico,Piso,Leon,Parada,CC,5467348,M,31213213,4745854,15,2,1999,leon@gmail.com,Bogota,Colombia,Carrera 24c #25-34 sur,Candelaria,14,22,0.
+Hospital San Ignacio,Enfermero,Piso,Oscar,Ruiz,CC,826400052,M,43643743,4389349,11,6,1999,oscar@gmail.com,Soacha,Colombia,Diagonal 24c #25-34 sur,San Mateo,14,22,0.

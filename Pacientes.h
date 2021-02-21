@@ -3,6 +3,11 @@
 #include <iostream>
 #include <cstdlib>
 #include "Listas.h"
+struct FechaCita{
+	int diaCita;
+	int MesCita;
+	int AnioCita;
+};
 struct Paciente{
 	string Nombre;
 	string Apellido;
@@ -16,6 +21,7 @@ struct Paciente{
 	string Estado;
 	string NivelGravedad;
 	string Medicamentos;
+	Lista <FechaCita> FechasPacientes; 
 	Lista <long int> idPersonal;
 	
 	
