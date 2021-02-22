@@ -50,22 +50,22 @@ bool PersonalSalud::calcularEdad( int anioAct , int mesAct, int fechAct, int ani
     int respFech , respMes;
 
     if ( fechAct < fechNac  )
-    {   //En caso de ser menor la fecha actual que el nacimiento
-        fechAct = fechAct + 30; // Se le suma los 30 días (1 mes) a la fecha actual
-        mesAct = mesAct - 1; // Se le resta un mes (30 días) al mes actual
-        respFech =  fechAct - fechNac; //Se le resta fecha nacimiento al actual
+    {   
+        fechAct = fechAct + 30; 
+        mesAct = mesAct - 1; 
+        respFech =  fechAct - fechNac; 
     }
-    else //En caso de ser mayor la fecha actual que el nacimiento
-        respFech =  fechAct - fechNac;  //Se le resta fecha nacimiento al actual
+    else 
+        respFech =  fechAct - fechNac;  
 
     if( mesAct < mesNac )
-    {   //En caso de ser menor el mes actual que el nacimiento
-        mesAct = mesAct + 12; // Se le suma los 12 meses (1 año) al mes actual
-        anioAct = anioAct - 1 ; // Se le resta 1 año ( 12 meses) al año actual
-        respMes = mesAct - mesNac; //Se le resta año nacimiento al actual
+    {   
+        mesAct = mesAct + 12; 
+        anioAct = anioAct - 1 ;
+        respMes = mesAct - mesNac; 
     }
-    else //En caso de ser mayor el mes actual que el nacimiento
-        respMes = mesAct - mesNac; //Se le resta año nacimiento al actual
+    else 
+        respMes = mesAct - mesNac; 
  
     if(anioAct - anioNac>=18)
     	return true;

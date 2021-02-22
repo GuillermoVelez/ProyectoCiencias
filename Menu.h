@@ -12,12 +12,15 @@ class Menu{
 	    
 	public:
 		Menu(){
-			 
+		 
 		};
 		void MenuPrincipal();
 		void MenuConsultas();
 };
 void Menu::MenuPrincipal(){
+	controlar.RecuperarPacientes();
+	controlar.Hospital_Personal();	
+
 	int op=0;
 	while(op<7){
 		system("cls");
@@ -180,7 +183,9 @@ void Menu::MenuPrincipal(){
 		else if(op==5)
 		{
 			Simulacion simular(controlar);
+
 			simular.MostrarHospitales();
+			
 		}
 		else if (op==6)
 		{
