@@ -24,7 +24,8 @@ void Menu::MenuPrincipal(){
 		
 		controlar.RecuperarPacientes();
         controlar.Hospital_Personal();
-    //	Consultas consultar(controlar);
+    	Consultas consultar(controlar);
+    	consultar.LocalidadPacientesEnfermosAntes("Restrepo");
    	//	consultar.HospitalesCalleCarreras(22,28,15,17);
    	//	consultar.HospitalesCalleCarreras(100,100,100,100);
    		//controlar.AdicionarHospital("hcd","jsa","sady",32,23,15,13,21,20);

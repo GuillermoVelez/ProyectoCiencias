@@ -9,12 +9,13 @@
 #include <time.h>
 
 using namespace std;
-/*
+
 class Consultas{
-	private:
+	
 		Hospital auxH;
 		Personal auxPS;
 		Paciente auxPa;
+		FechaCita auxFC;
 		Lista <Hospital> Listah;
 	    Lista <Personal> ListaPS;
 	    Lista <Paciente> ListaPa;
@@ -25,11 +26,11 @@ class Consultas{
 		ListaPa= RecuperarListas.getListaPacientes();
 		};
 		void HospitalesCalleCarreras(int calle_inicial,int calle_final,int carrera_inicial,int carrera_final);
-		void PersonalHorarioLocalidad(string Localidad, int hora_inicial, int hora_final);
-		void PersonalPacienteHorario(string paciente, int hora);
+		void PersonalHorarioLocalidad(string localidad, int hora_inicial, int hora_final);
+		void PersonalPacienteHorario(string nombre, string apellido, int hora);
 		void LocalidadPacientesEnfermosAntes(string Localidad);
-		void PersonalMostrarPacientesEnTiempo (string nombre , string apellido , int inicio, int fin);
-		void PacientePSConRangoDAtencion(string nombre , string apellido , int inicio , int fin);
+		void PersonalMostrarPacientesEnTiempo (string nombre , string apellido);
+		void PacientePSConRangoDAtencion(string nombre , string apellido);
 		void PacientesLocalidadEdad (string localidad, int edadMinima , int edadMaxima);
 		void PacientesEdad(int edadMinima , int edadMaxima);
 };
@@ -49,13 +50,18 @@ void Consultas::HospitalesCalleCarreras(int calle_inicial,int calle_final,int ca
     
 }
 
-void Consultas::PersonalHorarioLocalidad(string Localidad, int hora_inicial, int hora_final){
+void Consultas::PersonalHorarioLocalidad(string localidad, int hora_inicial, int hora_final){
 	int cont=0;
 	for(int j=1;j<=ListaPS.tamano_lista();j++){
     	auxPS=ListaPS.obtenerDato(j);
-    	if(auxPS.Barrio == Localidad && auxPS.hora_inicial == hora_inicial && auxPS.hora_final==hora_final){
-    		cout<<auxPS.Nombre<<"\t"<<auxPS.Apellido<<"\n";
-			cont++;
+    	if(auxPS.Barrio==localidad ){
+    		if (auxPS.hora_inicial==hora_inicial){
+    			if (auxPS.hora_final==hora_final){
+    				cout<<auxPS.Nombre<<"\t"<<auxPS.Apellido<<"\n";
+					cont++;
+				}
+			}
+    	
 		}
     
     }
@@ -65,8 +71,8 @@ void Consultas::PersonalHorarioLocalidad(string Localidad, int hora_inicial, int
 		 
 }
 
-void Consultas::PersonalPacienteHorario( string paciente, int hora){
-	
+void Consultas::PersonalPacienteHorario( string nombre, string apellido , int hora){
+	cout<<"El paciente: "<<nombre<<" "<<apellido<<" puede ser atendid@ por:\n";
 	int cont=0;
 	for(int j=1;j<=ListaPS.tamano_lista();j++){
     	auxPS=ListaPS.obtenerDato(j);
@@ -96,48 +102,63 @@ void Consultas::LocalidadPacientesEnfermosAntes(string Localidad){
 	}
 }
 
-void Consultas::PersonalMostrarPacientesEnTiempo(string nombre, string apellido , int inicio , int fin){
+void Consultas::PersonalMostrarPacientesEnTiempo(string nombre , string apellido ){
 	
 	int cont=0;
 	for(int j=1;j<=ListaPS.tamano_lista();j++){
 		auxPS=ListaPS.obtenerDato(j);
 		if(auxPS.Nombre == nombre && auxPS.Apellido == apellido)
 		{
-			int cont2=0;
 			for(int y=0;y<=auxPS.pacientesPS.tamano_lista();y++){
-				
+				auxPa=auxPS.pacientesPS.obtenerDato(y);
+				cout<<"La persona de salud\t"<<auxPS.Nombre<<"\t"<<auxPS.Apellido<<"\t con cedula "<<auxPS.NumeroIdentificacion<<endl;
+				cout<<"Tiene cita con: "<<endl;
+				auxFC=auxPa.FechasPacientes.obtenerDato(1);
+				cout<<auxPa.Nombre<<"\t"<<auxPa.Apellido<<"\t tiene cita el "<<auxFC.diaCita<<"/"<<auxFC.MesCita<<"/"<<auxFC.AnioCita<<endl;
+				auxFC=auxPa.FechasPacientes.obtenerDato(2);
+				cout<<auxPa.Nombre<<"\t"<<auxPa.Apellido<<"\t tiene cita el "<<auxFC.diaCita<<"/"<<auxFC.MesCita<<"/"<<auxFC.AnioCita<<endl;
 			}
+			cont++;
 		}
 	}
+	if (cont==0){
+		cout<<"No existe el personal de la salud digitado...\n";
+	}
 }
-// consulta 5 no se como avanzar
 
-void Consultas::PacientePSConRangoDAtencion(string nombre, string apellido , int inicio , int fin){
+void Consultas::PacientePSConRangoDAtencion(string nombre, string apellido){
 	
 	int con=0;
 	for(int j=1;j<=ListaPa.tamano_lista();j++){
 		auxPa=ListaPa.obtenerDato(j);
-		if(auxPa.Nombre == nombre && auxPa.Apellido == apellido){
-			for(int y=0;y<=auxPa.idPersonal.tamano_lista();y++)
-			{
-				for(int f=1;f<=ListaPS.tamano_lista();f++){
-					auxPS=ListaPS.obtenerDato(f);
-					if(auxPS.NumeroIdentificacion==auxPa.idPersonal.obtenerDato(y)){
-						cout<<auxPS.Nombre<<"\t"<<auxPS.Apellido<<"\t";
+		if (auxPa.Nombre==nombre && auxPa.Apellido==apellido){
+			cout<<"El/La peciente: "<<auxPa.Nombre<<" "<<auxPa.Apellido<<"\t tiene cita con: "<<endl;
+			for (int u=1;u<=auxPa.idPersonal.tamano_lista();u++){
+				for(int i=1;j<=ListaPS.tamano_lista();i++){
+					auxPS=ListaPS.obtenerDato(i);
+					if(auxPa.idPersonal.obtenerDato(u)==auxPS.NumeroIdentificacion){
+						cout<<auxPS.Nombre<<" "<<auxPS.Apellido<<endl;
+						con++;
 					}
 				}
 			}
+			auxFC=auxPa.FechasPacientes.obtenerDato(1);
+			cout<<"En las fechas:\n"<<auxFC.diaCita<<"/"<<auxFC.MesCita<<"/"<<auxFC.AnioCita<<endl;
+			auxFC=auxPa.FechasPacientes.obtenerDato(2);
+			cout<<auxFC.diaCita<<"/"<<auxFC.MesCita<<"/"<<auxFC.AnioCita<<endl;		
 		}
 	}
+	if(con==0){
+		cout<<"Este paciente no tiene citas programadas..."<<endl;
+	}
 }
-// consulta 6 no se como avanzar
+
 
 
 void Consultas::PacientesLocalidadEdad(string localidad, int edadMinima , int edadMaxima){
 	int conta=0;
 	for (int j=1;j<=ListaPa.tamano_lista();j++){
 		auxPa=ListaPa.obtenerDato(j);
-
 		int edad = 2021-auxPa.anio;
 		if(auxPa.mes>2){
 			edad--;
@@ -193,11 +214,13 @@ void Consultas::PacientesEdad(int edadMinima , int edadMaxima){
 		else{
 			estaen=3;
 		}
-		int edad = 2021-auxPa.anio;
+		int edad;
+		edad = 2021-auxPa.anio;
 		if(auxPa.mes>2){
 			edad--;
 		}
 		if (edad>=edadMinima && edad<=edadMaxima){
+			conta++;
 			cout<<auxPa.Nombre<<" "<<auxPa.Apellido<<": \n";
 			cout<<"Edad: \t"<<edad<<"\n";
 			cout<<"Estado: \t"<<auxPa.Estado<<"\n";
@@ -217,6 +240,10 @@ void Consultas::PacientesEdad(int edadMinima , int edadMaxima){
 				cout<<"En la localidad de "<<l<<endl;
 			}
 		}
+	}
+	if(conta==0){
+		cout<<"No hay pacientes en este rango de edad..."<<endl;
+	}
 }
-*/
+
 #endif /*Consultas_h*/
