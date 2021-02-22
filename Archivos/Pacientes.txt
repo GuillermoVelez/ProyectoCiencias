@@ -1,6 +1,6 @@
-Guillermo,Velez,1234,M,21,10,2001,Ninguna,Olaya,Asintomatico,Leve,acetaminofen,14,4,2020,15,5,2020,2451213,72832.
+Guillermo,Velez,1234,M,21,10,2001,Ninguna,Olaya,Asintomatico,Severo,acetaminofen,14,4,2020,15,5,2020,2451213,72832,894745,32673427.
 Juan,Bautista,12345,M,21,10,2001,Ninguna,Olaya,Asintomatico,Moderado,acetaminofen,12,2,2020,29,1,2020,319218,245612,2451212.
-Luisa,Espitia,621721,F,12,12,1998,Ninguna,Suba,Asintomatico,Leve,Gengibre,28,2,2020,13,4,2020,2451213,72832.
+Luisa,Espitia,621721,F,12,12,1998,Ninguna,Suba,Asintomatico,Moderado,Gengibre,28,2,2020,13,4,2020,2451213,72832,894745.
 Daniel,Vargas,467342,M,15,11,2004,Ninguna,Restrepo,Asintomatico,Moderado,acetaminofen,11,8,2020,11,7,2020,319218,245612,2451212.
 Sofia,Munoz,432112,F,15,11,1999,Dermatitis,Restrepo,Asintomatico,Leve,Gengibre,11,8,2020,11,7,2020,319218,245612.
 David,Segura,578481,M,15,11,2001,Dermatitis,Quiroga,Asintomatico,Leve,Gengibre,30,12,2020,9,12,2020,319218,245612.

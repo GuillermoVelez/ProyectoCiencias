@@ -278,8 +278,6 @@ void Controlador::AdicionarPaciente(string Nombre,string Apellido,long int Numer
 	}
 	Escribir.ModificarArchivoPaciente(ListaPa);
 
-
-
 }
 void Controlador::Hospital_Personal(){
 	int contM=0;
