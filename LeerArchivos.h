@@ -9,21 +9,26 @@
 #include <string> 
 #include <sstream>  
 using namespace std;
+//Clase encargada de leer los archivos
 class LeerArchivos{
 	
-	//Lista<Hospitales> ListaAuxH;
-//	PersonalSalud personalmedico;
 	private:
 		
 		
 	
 	public:
 		LeerArchivos(){
-		
 		};
+		//Constructor de la clase LeerArchivos
+		
 		Lista <Hospital> LLenarHospitales(Lista <Hospital> Listah);
+		//Metodo encargado de leer el archuvo hospital y y meterlo en una lista
+		
 		Lista <Personal> LLenarPersonalSalud(Lista <Personal> ListaPS);
+		//Metodo encargado de leer el archivo de personal y meterlo en una lista
+		
 		Lista <Paciente> LLenarPacientes(Lista <Paciente> ListaPa);
+		//Metodo encargado de leer el archivo de pacientes y meterlo en una lista
 };
 Lista <Hospital> LeerArchivos::LLenarHospitales(Lista <Hospital> Listah){
 
@@ -179,12 +184,7 @@ Lista <Personal> LeerArchivos::LLenarPersonalSalud(Lista <Personal> ListaPS){
 		}
 		
     file.close();
-    for(int j=1;j<=ListaPS.tamano_lista();j++){
-		     	auxPS=ListaPS.obtenerDato(j);
-		     	cout<<j<<": ";
-		     	cout<<auxPS.Nombre<<","<<auxPS.Tipo<<","<<auxPS.Hospital<<","<<auxPS.Direccion<<","<<auxPS.num_pacientes<<endl;    
-		     
-	}
+   
     return ListaPS;
 }
 
@@ -242,16 +242,21 @@ Lista <Paciente> LeerArchivos::LLenarPacientes(Lista <Paciente> ListaPa){
            	
            	getline(file,linea,',');
            	auxFC.diaCita=atoi(linea.c_str());
+           	
            	getline(file,linea,',');
            	auxFC.MesCita=atoi(linea.c_str());
+           	
            	getline(file,linea,',');
            	auxFC.AnioCita=atoi(linea.c_str());
            	auxPa.FechasPacientes.insertar_final(auxFC);
+           	
            	getline(file,linea,',');
            	auxFC.diaCita=atoi(linea.c_str());
+           	
            	getline(file,linea,',');
            	auxFC.MesCita=atoi(linea.c_str());
-           	if(auxPa.Estado=="Muerto"){
+           	
+           	if(auxPa.Estado=="Muerto" || auxPa.Estado=="Recuperado"){
            		getline(file,linea,'.');
            		auxFC.AnioCita=atoi(linea.c_str());
            		auxPa.FechasPacientes.insertar_final(auxFC);

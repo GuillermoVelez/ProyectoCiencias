@@ -1,10 +1,4 @@
-/**
-  *@file Controlador.h
-  *@version 1.0
-  *@date 22/02/2021
-  *@title Clase Controlador
-  *@brief Clase principal que maneja el programa
-  */
+
 #ifndef	Controlador_h
 #define Controlador_h
 #include "Listas.h"
@@ -18,20 +12,19 @@
 #include <cstring>
 #include <ctime>
 using namespace std;
-/**
-*/
+// Clase encargada de Leer y Escribir las listas en los archivos, tambien sera usada para añadir nuevos elementos a la lista
 class Controlador{
 	private :
-		Hospitales LlenarH;
-		Hospital auxH;
-		Personal auxPS;
-		Paciente auxPa;
-		FechaCita auxFC;
-		LeerArchivos leer;
-		EscribirArchivos Escribir;
-	    Lista <Hospital> Listah;
-	    Lista <Personal> ListaPS;
-	    Lista <Paciente> ListaPa;
+
+		Hospital auxH; //Auxiliar para cecuperar datos de tipo hospital
+		Personal auxPS; //Auxiliar para cecuperar datos de tipo Personal
+		Paciente auxPa; //Auxiliar para cecuperar datos de tipo Paciente
+		FechaCita auxFC; //Auxiliar para cecuperar datos de tipo FechaCita
+		LeerArchivos leer; //Objeto  usado para llamar a la clase que modificara los archivos
+		EscribirArchivos Escribir; //Objeto  usado para llamar a la clase que leera los archivos
+	    Lista <Hospital> Listah; //Lista de hospitales
+	    Lista <Personal> ListaPS; //Lista de hospitales
+	    Lista <Paciente> ListaPa; //Lista de Pacientes
 	public:
 		 
 		Controlador(){
@@ -39,23 +32,50 @@ class Controlador{
 			Listah=leer.LLenarHospitales(Listah);
 			ListaPa=leer.LLenarPacientes(ListaPa);
 		};
+		
 	void AdicionarHospital(string ,string ,string ,int , int ,int , int ,int , int);
+	//Metodo para adicionar hospitales
+	
 	void AdicionarPersonal(string,string, string, string, string, string ,long int,string,int ,int,int,int,int,string ,string,string ,string ,string ,int,int,int);
+	//Metodo para adicionar Personal
+	
 	void AdicionarPaciente(string ,string ,long int ,string ,int ,int ,int ,string ,string ,string ,string ,string, int, string );
+	//Metodo para adicionar Paciente
+	
 	void Hospital_Personal();
+	//Metodo para asignar el personal a cada hospital
+	
 	void RecuperarPacientes();
+	//Metodo para recuperar a que personal fue asignado cada paciente
+	
 	Paciente Personal_Paciente(Paciente,int,string);
+	//Metodo para asginar personal al paciente
+	
 	void ConsultarHospitales();
 	void ConsultarPersonalSalud();
 	void ConsultarPacientes();
+	
 	Lista <Hospital> getListaHospitales();
+	//Metodo para recuperar lista de hospitales
+	
 	Lista <Personal> getListaPersonal();
+	//Metodo para recuperar lista de Personal
+	
 	Lista <Paciente> getListaPacientes();
+	//Metodo para recuperar lista de Pacientes
+	
 	void setListaHospitales(Lista <Hospital> LHospitales);
+	//Metodo para Modificar lista de hospitales
+	
 	void setListaPersonal(Lista <Personal> LPersonalDeSalud);
+	//Metodo para Modificar lista de Personal
+	
 	void setListaPacientes(Lista <Paciente> LPacientes);
+	//Metodo para Modificar lista de Pacientes
 
-
+	void Finalizar();
+	//Metodo para finalizar la ejecucion del programa
+	
 	
 };
 
@@ -356,9 +376,6 @@ Paciente Controlador::Personal_Paciente(Paciente nuevo_paciente,int hora, string
 		
 	}
 	cout<<endl;
-		for(int k=1;k<=nuevo_paciente.idPersonal.tamano_lista();k++){
-			cout<<nuevo_paciente.idPersonal.obtenerDato(k)<<endl;
-		}
 	return nuevo_paciente;
 }
 void Controlador::RecuperarPacientes(){
@@ -376,6 +393,12 @@ void Controlador::RecuperarPacientes(){
 		ListaPS.cambiar(i,auxPS);
 	}
 }
+void Controlador::Finalizar(){
+	Escribir.ModificarArchivoHospital(Listah);
+	Escribir.ModificarArchivoPersonal(ListaPS);
+	Escribir.ModificarArchivoPaciente(ListaPa);
+	exit(3);
+}
 Lista <Hospital> Controlador::getListaHospitales(){
 	return  Listah;
 }
@@ -386,12 +409,13 @@ Lista <Paciente> Controlador::getListaPacientes(){
 	return  ListaPa;
 }
 void Controlador::setListaHospitales(Lista <Hospital> LHospitales){
-	
+	Listah=LHospitales;
 }
 void Controlador::setListaPersonal(Lista <Personal> LPersonalDeSalud){
+	ListaPS=LPersonalDeSalud;
 	
 }
 void Controlador::setListaPacientes(Lista <Paciente> LPacientes){
-	
+	ListaPa=LPacientes;
 }
 #endif /*Controlador */ 

@@ -9,7 +9,8 @@
 #include <time.h>
 
 using namespace std;
-/*class Consultas{
+/*
+class Consultas{
 	private:
 		Hospital auxH;
 		Personal auxPS;

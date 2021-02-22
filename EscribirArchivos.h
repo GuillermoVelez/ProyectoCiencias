@@ -8,14 +8,22 @@
 #include <cstdlib>
 #include <fstream>
 using namespace std;
+//Clase encargada modificar los archivos cuando finalize el programa
 class EscribirArchivos{
 	public:
-		EscribirArchivos(){
-			
+		
+		EscribirArchivos(){		
 		}
+		//Contructor de la clase
+		
 		void ModificarArchivoHospital(Lista<Hospital> NuevaListaH );
+		//Metodo utilizado para modificiar el archivo de Hospitales
+		
 		void ModificarArchivoPersonal(Lista<Personal> NuevaListaPS );
+		//Metodo utilizado para modificiar el archivo de Personal
+		
 		void ModificarArchivoPaciente(Lista<Paciente> NuevaListaP);
+		//Metodo utilizado para modificar el archivo de Pacientes
 };
 void EscribirArchivos::ModificarArchivoHospital(Lista<Hospital> NuevaListaH ){
 	Hospital auxH;
@@ -57,16 +65,22 @@ void EscribirArchivos::ModificarArchivoPaciente(Lista <Paciente> NuevaListaP){
 	for(int i=1;i<=NuevaListaP.tamano_lista();i++){
 		auxP=NuevaListaP.obtenerDato(i);
 		file<<auxP.Nombre<<','<<auxP.Apellido<<','<<auxP.NumeroIdentificacion<<','<<auxP.sexo<<','<<auxP.dia<<','<<auxP.mes<<','<<auxP.anio<<','<<auxP.Enfermedades<<','<<auxP.Localidad<<','<<auxP.Estado<<','<<auxP.NivelGravedad<<','<<auxP.Medicamentos;
+		
 		for(int k=1;k<=auxP.FechasPacientes.tamano_lista();k++){	
 			auxFC=auxP.FechasPacientes.obtenerDato(k);
 			file<<','<<auxFC.diaCita<<','<<auxFC.MesCita<<','<<auxFC.AnioCita;	
 		}
-		for(int j=1;j<=auxP.idPersonal.tamano_lista(); j++){
-			file<<','<<auxP.idPersonal.obtenerDato(j);
-			if(j==auxP.idPersonal.tamano_lista())
-				file<<'.';
+		if(auxP.idPersonal.lista_vacia()){
+			file<<'.';
+		}else{
+			for(int j=1;j<=auxP.idPersonal.tamano_lista(); j++){
+				file<<','<<auxP.idPersonal.obtenerDato(j);
+				if(j==auxP.idPersonal.tamano_lista())
+					file<<'.';
 			
+			}
 		}
+		
 		if(i!=NuevaListaP.tamano_lista())
 			file<<endl;
 	}
